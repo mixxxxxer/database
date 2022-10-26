@@ -1,15 +1,12 @@
 # file: app.rb
-
+require_relative 'lib/album_repository'
 require_relative 'lib/database_connection'
+require_relative 'lib/album'
 
 # We need to give the database name to the method `connect`.
 DatabaseConnection.connect('music_library_test')
 
 # Perform a SQL query on the database and get the result set.
-sql = 'SELECT * FROM albums;'
-result = DatabaseConnection.exec_params(sql, [])
-
-# Print out each record from the result set .
-result.each do |record|
-  p record
-end
+albums = AlbumRepository.new
+album =  albums.find('3')
+puts "#{album.id} - #{album.title} - #{album.release_year} - #{album.artist_id}"
