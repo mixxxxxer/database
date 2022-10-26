@@ -81,7 +81,7 @@ Define the attributes of your Model class. You can usually map the table columns
 # Model class
 # (in lib/student.rb)
 
-class Boo
+class Book
   # Replace the attributes by your own columns.
   attr_accessor :id, :name, :cohort_name
 end
@@ -116,7 +116,7 @@ class BookRepository
   # No arguments
   def all
     # Executes the SQL query:
-    # SELECT id, title, author_name FROM students;
+    # SELECT id, title, author_name FROM book_store;
 
     # Returns an array of Book objects.
   end
@@ -162,7 +162,7 @@ This is so you get a fresh table contents every time you run the test suite.
 ```ruby
 # EXAMPLE
 
-# file: spec/student_repository_spec.rb
+# file: spec/book_repository_spec.rb
 
 def reset_books_table
   seed_sql = File.read('spec/seeds.sql')
@@ -170,7 +170,7 @@ def reset_books_table
   connection.exec(seed_sql)
 end
 
-describe StudentRepository do
+describe BookRepository do
   before(:each) do 
     reset_books_table
   end
