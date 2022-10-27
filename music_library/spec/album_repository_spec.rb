@@ -33,4 +33,34 @@ RSpec.describe AlbumRepository do
     expect(album.release_year).to eq('1989')
     expect(album.artist_id).to eq('1')
   end
+
+  it 'add 1 new album, should return last added album' do
+    repository = AlbumRepository.new
+    album = Album.new
+    album.title = 'Trompe le Monde'
+    album.release_year = 1991
+    album.artist_id = 1
+    repository.create(album)
+    all_albums = repository.all
+    expect(all_albums.size).to eq(13)
+  end
+
+  it 'update album, should return new title' do
+    repository = AlbumRepository.new
+    album = repository.find(1)
+    album.title = 'No-Doolittle'
+    album.release_year = 1991
+    repository.update(album)
+
+    new_album = repository.find(1)
+    expect(new_album.title).to eq('No-Doolittle')
+  end
+
+
+  it 'delete album, should return 11 albums' do
+    repository = AlbumRepository.new
+    repository.delete(1)
+    all_albums = repository.all
+    expect(all_albums.size).to eq(11)
+  end
 end
